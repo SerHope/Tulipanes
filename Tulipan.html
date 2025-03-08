@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campo de Tulipanes con Confeti</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 100vh;
+            background-color: #87CEEB;
+            overflow: hidden;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Carta inicial */
+        .carta {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 300px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .carta h2 {
+            font-size: 1.5rem;
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        .carta button {
+            background-color: #ff69b4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .carta button:hover {
+            background-color: #ff4d6d;
+        }
+
+        /* Contenido principal (oculto inicialmente) */
+        .contenido-principal {
+            display: none; /* Oculto hasta que se haga clic en el botón */
+        }
+
+        /* Suelo verde */
+        .suelo {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background-color: #32CD32;
+            z-index: 1; /* Asegura que el suelo esté detrás de los tulipanes */
+        }
+
+        .bouquet {
+            display: flex;
+            gap: 40px;
+            position: relative;
+            z-index: 2; /* Asegura que los tulipanes estén sobre el suelo */
+        }
+
+        .tulip-container {
+            opacity: 0;
+            animation: aparecer 2s ease-in-out forwards, moverTulipan 3s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+
+        .tulip-container:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        .tulip-container:nth-child(2) {
+            animation-delay: 1s;
+        }
+
+        .tulip-container:nth-child(3) {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes moverTulipan {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+        }
+
+        .petal {
+            transition: fill 0.3s;
+        }
+
+        .tulip-container:hover .petal {
+            fill: #ff4d6d;
+        }
+
+        .mensaje {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            color: #ff69b4;
+            text-align: center;
+            animation: animarMensaje 2s ease-in-out infinite alternate, brillo 3s ease-in-out infinite;
+            z-index: 3; /* Asegura que el mensaje esté sobre los tulipanes */
+        }
+
+        @keyframes animarMensaje {
+            0% {
+                transform: translateX(-50%) scale(1);
+            }
+            100% {
+                transform: translateX(-50%) scale(1.1);
+            }
+        }
+
+        @keyframes brillo {
+            0%, 100% {
+                text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4, 0 0 30px #ff69b4;
+            }
+            50% {
+                text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff69b4, 0 0 60px #ff69b4;
+            }
+        }
+
+        .cielo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #87CEEB, #B0E2FF);
+            z-index: 0; /* Asegura que el cielo esté detrás de todo */
+        }
+
+        .nube {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: moverNubes 20s linear infinite;
+        }
+
+        .nube:nth-child(1) {
+            top: 20%;
+            left: -100px;
+            width: 150px;
+            height: 60px;
+            animation-duration: 25s;
+        }
+
+        .nube:nth-child(2) {
+            top: 40%;
+            left: -200px;
+            width: 200px;
+            height: 80px;
+            animation-duration: 30s;
+        }
+
+        .nube:nth-child(3) {
+            top: 60%;
+            left: -150px;
+            width: 180px;
+            height: 70px;
+            animation-duration: 35s;
+        }
+
+        @keyframes moverNubes {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Carta inicial -->
+    <div class="carta">
+      <h2>¡Hola! Hoy celebro tu fuerza, tu luz y todo lo maravillosa que eres. Que cada sueño que anhelas se haga realidad y que nunca te falte amor, alegría y éxito. Eres increíble, única y especial. ¡Disfruta tu día al máximo! !Dios Te Bendiga! 💖💐</h2>
+            <h2>Haz clic para ver una sorpresa</h2>
+        <button onclick="mostrarContenido()">
+            <span>Ver sorpresa</span>
+            <span style="font-size: 1.2rem;">→</span>
+        </button>
+    </div>
+
+    <!-- Contenido principal (oculto inicialmente) -->
+    <div class="contenido-principal">
+        <!-- Cielo con nubes -->
+        <div class="cielo">
+            <div class="nube"></div>
+            <div class="nube"></div>
+            <div class="nube"></div>
+        </div>
+
+        <!-- Suelo verde -->
+        <div class="suelo"></div>
+
+        <!-- Mensaje "Feliz Día De La Mujer Sele 💖" -->
+        <h1 class="mensaje">Feliz Día De La Mujer Sele 💚</h1>
+
+        <!-- Ramo de tulipanes -->
+        <div class="bouquet">
+            <!-- Primer tulipán -->
+            <svg class="tulip-container" width="100" height="300" viewBox="0 0 200 300">
+                <rect class="tallo" x="95" y="120" width="10" height="150" fill="#228B22" />
+                <path d="M 100 170 C 80 150, 40 200, 70 230" fill="#228B22" />
+                <path d="M 100 170 C 120 150, 160 200, 130 230" fill="#228B22" />
+                <path class="petal" d="M 100 100 C 70 50, 30 50, 50 120 C 60 150, 80 160, 100 140" fill="#ff69b4" />
+                <path class="petal" d="M 100 100 C 130 50, 170 50, 150 120 C 140 150, 120 160, 100 140" fill="#ff69b4" />
+                <path class="petal" d="M 100 80 C 70 20, 130 20, 100 80" fill="#ff1493" />
+            </svg>
+
+            <!-- Segundo tulipán -->
+            <svg class="tulip-container" width="100" height="300" viewBox="0 0 200 300">
+                <rect class="tallo" x="95" y="120" width="10" height="150" fill="#228B22" />
+                <path d="M 100 170 C 80 150, 40 200, 70 230" fill="#228B22" />
+                <path d="M 100 170 C 120 150, 160 200, 130 230" fill="#228B22" />
+                <path class="petal" d="M 100 100 C 70 50, 30 50, 50 120 C 60 150, 80 160, 100 140" fill="#ff4500" />
+                <path class="petal" d="M 100 100 C 130 50, 170 50, 150 120 C 140 150, 120 160, 100 140" fill="#ff4500" />
+                <path class="petal" d="M 100 80 C 70 20, 130 20, 100 80" fill="#ff6347" />
+            </svg>
+
+            <!-- Tercer tulipán -->
+            <svg class="tulip-container" width="100" height="300" viewBox="0 0 200 300">
+                <rect class="tallo" x="95" y="120" width="10" height="150" fill="#228B22" />
+                <path d="M 100 170 C 80 150, 40 200, 70 230" fill="#228B22" />
+                <path d="M 100 170 C 120 150, 160 200, 130 230" fill="#228B22" />
+                <path class="petal" d="M 100 100 C 70 50, 30 50, 50 120 C 60 150, 80 160, 100 140" fill="#ffcc00" />
+                <path class="petal" d="M 100 100 C 130 50, 170 50, 150 120 C 140 150, 120 160, 100 140" fill="#ffcc00" />
+                <path class="petal" d="M 100 80 C 70 20, 130 20, 100 80" fill="#ffd700" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- Confeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        // Función para mostrar el contenido principal
+        function mostrarContenido() {
+            document.querySelector('.carta').style.display = 'none'; // Oculta la carta
+            document.querySelector('.contenido-principal').style.display = 'block'; // Muestra el contenido principal
+
+            // Lanzar confeti al mostrar el contenido
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 },
+            });
+
+            // Lanzar confeti repetidamente cada 3 segundos
+            setInterval(() => {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                });
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
